@@ -12,4 +12,8 @@ const products = require('./routes/product');
 app.use('/api', products)
 
 app.use(errorMiddleware);
+
+const bodyParser = require("body-parser")
+
+app.use(bodyParser.urlencoded({ extended: true }));
 module.exports = app;

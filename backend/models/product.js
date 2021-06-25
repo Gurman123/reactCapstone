@@ -1,10 +1,41 @@
 const mongoose = require('mongoose')
 
 const productSchema = new mongoose.Schema({
-
-    productName: { type: String, required: true, minlength: 3 },
-    productCategory: {
-        type: String, required: true,
+    name: {
+        type: String,
+        required: [true, 'Please enter product name'],
+        trim: true,
+        maxLength: [100, 'Product name cannot exceed 100 characters']
+    },
+    price: {
+        type: Number,
+        required: [true, 'Please enter product price'],
+        maxLength: [5, 'Product name cannot exceed 5 characters'],
+        default: 0.0
+    },
+    description: {
+        type: String,
+        required: [true, 'Please enter product description'],
+    },
+    ratings: {
+        type: Number,
+        default: 0
+    },
+    images: [
+        {
+            public_id: {
+                type: String,
+                required: true
+            },
+            url: {
+                type: String,
+                required: true
+            },
+        }
+    ],
+    category: {
+        type: String,
+        required: [true, 'Please select category for this product'],
         enum: {
             values: [
                 'Curtain panels',
@@ -17,37 +48,28 @@ const productSchema = new mongoose.Schema({
                 'Stage Masking',
                 'Church Paraments',
                 'Leather-Products'
-            ]
+            ],
+            message: 'Please select correct category for product'
         }
-
     },
-    productPrice: { type: Number, required: true },
-    productAvailabity: { type: String, enum: ['In stock', 'Out of stock'], default: 'In stock' },
-    productColour: { type: Array, default: 'black' },
-    productWidth: { type: Number, required: true },
-    productHeight: { type: Number, required: true },
+    // seller: {
+    //     type: String,
+    //     required: [true, 'Please enter product seller']
+    // },
+    stock: {
+        type: Number,
+        required: [true, 'Please enter product stock'],
+        maxLength: [5, 'Product name cannot exceed 5 characters'],
+        default: 0
+    },
+    numOfReviews: {
+        type: Number,
+        default: 0
+    },
+    width: { type: Number, required: true },
+    height: { type: Number, required: true },
     fabricWeight: { type: String, required: true },
-    productDescription: { type: String, required: true },
-    productRating: {
-        type: Number,
-        default: 0
-    },
-    images: [
-        {
-            public_id: {
-                type: String,
-                required: true
-            }, 
-            url: {
-                type: String,
-                required: true
-            }
-        }
-    ],
-    numofReviews: {
-        type: Number,
-        default: 0
-    },
+    productColour: { type: Array, default: 'Black' },
     reviews: [
         {
             name: {
@@ -58,19 +80,21 @@ const productSchema = new mongoose.Schema({
                 type: Number,
                 required: true
             },
-            comments: {
+            comment: {
                 type: String,
                 required: true
             }
         }
     ],
+    // user: {
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'User',
+    //     required: true
+    // },
     createdAt: {
         type: Date,
         default: Date.now
     }
-    //productReviews: [reviewSchema]
-
-
 })
 
-module.exports = mongoose.model('product', productSchema);
+module.exports = mongoose.model('Product', productSchema);
