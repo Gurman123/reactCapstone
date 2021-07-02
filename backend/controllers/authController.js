@@ -5,6 +5,8 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
 
+const crypto = require('crypto');
+
 //Register a user => /api/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
@@ -98,6 +100,77 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
     }
 })
 
+// Reset password =>  api/password/reset
+exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
+    // Hash URL token
+    const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex')
+    const user = await User.findOne({
+        resetPasswordToken,
+        resetPasswordExpire: { $gt: Date.now() }
+    })
+    
+    if(!user) {
+       return next(new ErrorHandler("Password reset token is invalid or has been expired!", 400));
+    }
+    if(req.body.password !== req.body.confirmPassword) {
+        return next(new ErrorHandler("Password does not match", 400))
+    }
+    //setup new password
+    user.password = req.body.password;
+
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    
+    await user.save();
+    sendToken(user, 200, res)
+})
+
+// Get currently gogged in user details  /api/me
+exports.getUserProfile = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.user.id);
+    res.status(200).json({
+        success: true,
+        user
+    })
+})
+
+// Update/changepassword   api/password/update
+exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.user.id).select('+password');
+    
+    //check previous user password
+    const isMatched = await user.comparePassword(req.body.oldPassword)
+    if(!isMatched) {
+        return next(new ErrorHandler('Old password is incorrect!', 400));
+    }
+    user.password = req.body.password;
+    await user.save();
+
+    sendToken(user, 200, res)
+
+})
+
+// update user profile    /api/me/update
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+   const newUserData = {
+       name: req.body.name,
+       email: req.body.email
+   }
+
+   // update avatar  TODO
+
+   const user  = await User.findByIdAndUpdate(req.user.id, newUserData,{
+       new: true,
+       runValidators: true,
+       useFindAndModify: false
+   })
+   res.status(200).json({
+       success: true,
+     
+   })
+
+})
+
 
 //Logout user api/logout
 exports.logout = catchAsyncErrors(async (req, res, next) => {
@@ -111,3 +184,66 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
         message: 'Logged out'
     })
 })
+
+// Admin routes
+
+//Get all users   /api/admin/users
+exports.allUsers = catchAsyncErrors(async (req, res, next) => {
+    const users = await User.find();
+
+    res.status(200).json({
+        success: true,
+        users
+    })
+})
+
+//Get user details    /api/admin/user/:id
+exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+   const user = await User.findById(req.params.id);
+
+   if(!user) {
+       return next(new ErrorHandler(`User does not found with id: ${req.params.id}`))
+   }
+   res.status(200).json({
+       success: true,
+       user
+   })
+})
+
+// update user profile  /api/admin/user/:id
+exports.updateUser = catchAsyncErrors(async (req, res, next) => {
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email,
+        role: req.body.role
+    }
+ 
+ 
+    const user  = await User.findByIdAndUpdate(req.params.id, newUserData,{
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
+    res.status(200).json({
+        success: true,
+      
+    })
+ 
+ })
+ 
+
+ //delete user   /api/admin/user/:id
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+    const user = await User.findById(req.params.id);
+ 
+    if(!user) {
+        return next(new ErrorHandler(`User does not found with id: ${req.params.id}`))
+    }
+    // remove avatar from cloudinary  TODO    
+    await user.remove();
+    
+    res.status(200).json({
+        success: true,
+       
+    })
+ })
