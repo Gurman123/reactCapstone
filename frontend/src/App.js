@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route} from 'react-router-dom'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Home from './components/Home'
+import UpdateProfile from './components/user/UpdateProfile';
 import ProductDetails from './components/product/ProductDetails';
 import Login from './components/user/Login';
 import Register from './components/user/Register';
@@ -32,9 +33,11 @@ function App() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <ProtectedRoute path="/me" component={Profile} exact />
+      <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
+
       </div>
       <Footer/>
-    </div>3
+    </div>
     </Router>
   );
 }
