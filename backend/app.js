@@ -17,10 +17,13 @@ app.use(fileUpload());
 
 const products = require('./routes/product');
 const auth = require('./routes/auth');
+const payment = require('./routes/payment');
+
 const order = require('./routes/order');
 
 app.use('/api', products)
 app.use('/api', auth)
+app.use('/api', payment)
 app.use('/api', order)
 
 app.use(errorMiddleware);
