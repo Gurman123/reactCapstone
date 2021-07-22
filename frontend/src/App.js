@@ -12,6 +12,10 @@ import ProductDetails from './components/product/ProductDetails';
 import Cart from './components/cart/Cart';
 import Shipping from './components/cart/Shipping';
 import confirmOrder from './components/cart/ConfirmOrder';
+import Payment from './components/cart/Payment';
+import OrderSuccess from './components/cart/OrderSuccess';
+
+import ListOrders from './components/order/ListOrders'
 
 import Login from './components/user/Login';
 import Register from './components/user/Register';
@@ -23,6 +27,9 @@ import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser} from './actions/userActions'
 import store from './store'
 import axios from 'axios';
+import { loadStripe } from '@stripe/stripe-js';
+//payment
+import {Elements} from '@stripe/react-stripe-js'
 
 function App() {
 
@@ -52,6 +59,13 @@ function App() {
       <Route path="/cart" component={Cart} exact/>
       <ProtectedRoute path="/shipping" component={Shipping} />
       <ProtectedRoute path="/order/confirm" component={confirmOrder} />
+      <ProtectedRoute path="/success" component={OrderSuccess} />
+      {stripeApiKey &&
+        <Elements stripe={loadStripe(stripeApiKey)}>
+          <ProtectedRoute path="/payment" component={Payment} />
+        </Elements>
+
+      }
 
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
@@ -62,6 +76,7 @@ function App() {
       <ProtectedRoute path="/me" component={Profile} exact />
       <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
       <ProtectedRoute path="/password/update" component={UpdatePassword} exact />
+      <ProtectedRoute path="/orders/me" component={ListOrders} exact />
       
       </div>
       <Footer/>
