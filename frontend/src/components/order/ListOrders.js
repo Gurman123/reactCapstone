@@ -56,7 +56,7 @@ const ListOrders = () => {
             ],
             rows: []
         }
-        console.log("orders",orders);
+        // console.log("orders",orders);
         orders.forEach(order => {
             data.rows.push({
                 id: order._id,
@@ -66,7 +66,7 @@ const ListOrders = () => {
                     ? <p style={{ color: 'green' }}>{order.orderStatus}</p>
                     : <p style={{ color: 'red' }}>{order.orderStatus}</p>,
                 actions:
-                    <Link to={`/orders/${order._id}`} className="btn btn-primary">
+                    <Link to={`/order/${order._id}`} className="btn btn-primary">
                         <i className="fa fa-eye"></i>
                     </Link>
             })
