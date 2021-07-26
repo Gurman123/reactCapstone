@@ -38,7 +38,6 @@ const NewProduct = ({history}) => {
         'Church Paraments',
         'Leather-Products'
 ]
-
 const alert = useAlert();
     const dispatch = useDispatch();
 
@@ -77,7 +76,6 @@ formData.set('fabricWeight',fabricWeight);
 images.forEach(image => {
     formData.append('images', image)
 })
-
 
     dispatch(newProduct(formData))
 }

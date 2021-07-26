@@ -90,7 +90,6 @@ export const deleteProduct = (id) => async (dispatch) => {
         })
     }
 }
-
 export const getProductDetails = (id) => async (dispatch) => {
     try{
         dispatch({ type: PRODUCT_DETAILS_REQUEST })

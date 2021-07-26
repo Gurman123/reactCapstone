@@ -85,7 +85,6 @@ const ProductsList = ({history}) => {
                     </Fragment>
             })
         })
-
         return data;
     }
     const deleteProductHandler = (id) => {
