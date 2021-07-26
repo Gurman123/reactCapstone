@@ -46,7 +46,13 @@ export const newProduct = (productData) => async (dispatch) => {
     try{
         dispatch({ type: NEW_PRODUCT_REQUEST })
 
-        const { data } = await axios.put(`/api/product/new`,productData,config)
+        const config = {
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.post(`/api/admin/product/new`,productData,config)
 
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
@@ -54,6 +60,7 @@ export const newProduct = (productData) => async (dispatch) => {
         })
     }
     catch(error){
+        console.log(error.response);
         dispatch({
             type: NEW_PRODUCT_FAIL,
             payload: error.response.data.message

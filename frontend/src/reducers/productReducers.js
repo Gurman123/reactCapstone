@@ -84,7 +84,7 @@ export const newProductReducer = (state = {product: {}}, action) => {
         case CLEAR_ERRORS:
             return {
                 ...state,
-                error: action.payload
+                error: null
             }
         default:
             return state
