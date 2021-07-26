@@ -20,6 +20,8 @@ const ProductsList = ({history}) => {
     const { loading, error, products } = useSelector(state => state.products);
     const { error: deleteError, isdeleted} = useSelector(state => state.product)
 
+    const { error: deleteError, isDeleted } = useSelector(state => state.product);
+
     useEffect(() => {
         dispatch(getAdminProducts());
 
@@ -31,7 +33,7 @@ const ProductsList = ({history}) => {
             alert.error(deleteError);
             dispatch(clearErrors())
         }
-        if(isdeleted){
+        if(isDeleted){
             alert.success('Product deleted successfully!');
             history.push('/admin/products');
             dispatch({ type: DELETE_PRODUCT_RESET});
