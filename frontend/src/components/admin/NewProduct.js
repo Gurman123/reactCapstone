@@ -22,6 +22,10 @@ const NewProduct = ({history}) => {
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
 
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
+    const [fabricWeight, setFabricWeight] = useState('0OZ');
+
     const categories =[
         'Curtain panels',
         'Pleated Curtains',
@@ -66,6 +70,9 @@ formData.set('description', description);
 formData.set('category', category);
 formData.set('stock', stock);
 formData.set('seller', seller);
+formData.set('width',width);
+formData.set('height',height);
+formData.set('fabricWeight',fabricWeight);
 
 images.forEach(image => {
     formData.append('images', image)
@@ -161,6 +168,36 @@ const onChange = e => {
                                         className="form-control"
                                         value={stock}
                                         onChange={(e) => setStock(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="width_field">Width</label>
+                                    <input
+                                        type="number"
+                                        id="width_field"
+                                        className="form-control"
+                                        value={width}
+                                        onChange={(e) => setWidth(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="height_field">Height</label>
+                                    <input
+                                        type="number"
+                                        id="height_field"
+                                        className="form-control"
+                                        value={height}
+                                        onChange={(e) => setHeight(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="fabricWeight_field">Fabric Weight</label>
+                                    <input
+                                        type="text"
+                                        id="fabricWeight_field"
+                                        className="form-control"
+                                        value={fabricWeight}
+                                        onChange={(e) => setFabricWeight(e.target.value)}
                                     />
                                 </div>
 
