@@ -150,43 +150,45 @@ export const newProductReducer = (state = {product: {}}, action) => {
     }
 }
 
-export const productReducer = (state = {}, action) => {
-    switch(action.type) {
+//old
 
-        case DELETE_PRODUCT_REQUEST:
-            return {
-                ...state,
-                loading: true
-            }
+// export const productReducer = (state = {}, action) => {
+//     switch(action.type) {
 
-        case DELETE_PRODUCT_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isDeleted: action.payload
-            }
+//         case DELETE_PRODUCT_REQUEST:
+//             return {
+//                 ...state,
+//                 loading: true
+//             }
 
-        case DELETE_PRODUCT_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            }
+//         case DELETE_PRODUCT_SUCCESS:
+//             return {
+//                 ...state,
+//                 loading: false,
+//                 isDeleted: action.payload
+//             }
 
-        case DELETE_PRODUCT_RESET:
-            return {
-                ...state,
-                isDeleted: false
-            }
+//         case DELETE_PRODUCT_FAIL:
+//             return {
+//                 ...state,
+//                 error: action.payload
+//             }
 
-        case CLEAR_ERRORS:
-            return {
-                ...state,
-                error: null
-            }
-        default:
-            return state
-    }
-}
+//         case DELETE_PRODUCT_RESET:
+//             return {
+//                 ...state,
+//                 isDeleted: false
+//             }
+
+//         case CLEAR_ERRORS:
+//             return {
+//                 ...state,
+//                 error: null
+//             }
+//         default:
+//             return state
+//     }
+// }
 
 export const productDetailsReducer = (state = {product : {}}, action) => {
     switch(action.type) {

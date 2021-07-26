@@ -18,7 +18,6 @@ const ProductsList = ({history}) => {
     const dispatch = useDispatch();
 
     const { loading, error, products } = useSelector(state => state.products);
-    const { error: deleteError, isdeleted} = useSelector(state => state.product)
 
     const { error: deleteError, isDeleted } = useSelector(state => state.product);
 
@@ -38,7 +37,7 @@ const ProductsList = ({history}) => {
             history.push('/admin/products');
             dispatch({ type: DELETE_PRODUCT_RESET});
         }
-    }, [dispatch, alert, error, deleteError, isdeleted, history])
+    }, [dispatch, alert, error, deleteError, isDeleted, history])
 
     const setProducts = () => {
         const data = {
