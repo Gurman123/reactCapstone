@@ -28,19 +28,15 @@ const ProductsList = ({history}) => {
             alert.error(error);
             dispatch(clearErrors())
         }
-
         if (deleteError) {
             alert.error(deleteError);
             dispatch(clearErrors())
         }
-
         if(isDeleted){
-
-            alert.success('Product deleted successfully');
+            alert.success('Product deleted successfully!');
             history.push('/admin/products');
-            dispatch({ type: DELETE_PRODUCT_RESET})
+            dispatch({ type: DELETE_PRODUCT_RESET});
         }
-
     }, [dispatch, alert, error, deleteError, isDeleted, history])
 
     const setProducts = () => {
@@ -81,11 +77,10 @@ const ProductsList = ({history}) => {
                 price: `$${product.price}`,
                 stock: product.stock,
                 actions: <Fragment>
-                    <Link to={`/admin/product/${product._id}`} className="btn btn-primary py-1 px-2">
+                    <Link to={`/admin/product/${product._id}`} className="btn btn-primary py-1 px-2" >
                         <i className="fa fa-pencil"></i>
                     </Link>
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick = {() => 
-                        deleteProductHandler(product._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" onClick = {() => deleteProductHandler(product._id)}>
                         <i className="fa fa-trash"></i>
                     </button>
                     </Fragment>
@@ -94,12 +89,9 @@ const ProductsList = ({history}) => {
 
         return data;
     }
-    const deleteProductHandler = (id) =>{
-
+    const deleteProductHandler = (id) => {
         dispatch(deleteProduct(id))
     }
-  
-
     return (
 
         <Fragment>
