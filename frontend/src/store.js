@@ -19,7 +19,8 @@ newOrder: newOrderReducer,
 myOrders: myOrdersReducer,
 orderDetails: orderDetailsReducer,
 newReview:newReviewReducer,
-newProduct:newProductReducer
+newProduct:newProductReducer,
+Product:productReducer
 })
 
 let initialState = {

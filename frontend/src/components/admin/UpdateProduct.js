@@ -1,17 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react'
 
-
 import MetaData from '../layout/MetaData'
-
 import Sidebar from './Sidebar'
 
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import {newProduct,clearErrors} from '../../actions/productActions'
-import { NEW_PRODUCT_RESET } from '../../constants/productConstants'
+import { updateProduct, getProductDetails, clearErrors } from '../../actions/productActions'
+import { UPDATE_PRODUCT_RESET } from '../../constants/productConstants'
 
-const NewProduct = ({history}) => {
-
+const UpdateProduct = ({ match, history }) => {
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
@@ -20,13 +17,15 @@ const NewProduct = ({history}) => {
     const [stock, setStock] = useState(0);
     const [seller, setSeller] = useState('');
     const [images, setImages] = useState([]);
-    const [imagesPreview, setImagesPreview] = useState([]);
+    
+    const [oldImages, setOldImages] = useState([]);
+    const [imagesPreview, setImagesPreview] = useState([])
+    const [width, setWidth] = useState();
+    const [height, setHeight] = useState();
+    const [fabricWeight, setFabricWeight] = useState('');
 
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
-    const [fabricWeight, setFabricWeight] = useState('0OZ');
 
-    const categories =[
+    const categories = [
         'Curtain panels',
         'Pleated Curtains',
         'Backdrops Curtains',
@@ -37,90 +36,109 @@ const NewProduct = ({history}) => {
         'Stage Masking',
         'Church Paraments',
         'Leather-Products'
-]
-const alert = useAlert();
+    ]
+
+    const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { loading, error, success } = useSelector(state => state.newProduct);
+    const { error, product } = useSelector(state => state.productDetails)
+    const { loading, error: updateError, isUpdated } = useSelector(state => state.product);
+
+    const productId = match.params.id;
 
     useEffect(() => {
+
+        if (product && product._id !== productId) {
+            dispatch(getProductDetails(productId));
+        } else {
+            setName(product.name);
+            setPrice(product.price);
+            setDescription(product.description);
+            setCategory(product.category);
+            setSeller(product.seller);
+            setStock(product.stock);
+            setOldImages(product.images);
+            setWidth(product.width);
+            setHeight(product.height);
+            setFabricWeight(product.fabricWeight);
+        }
 
         if (error) {
             alert.error(error);
             dispatch(clearErrors())
         }
-    
 
-    if(success){
-        history.push('/admin/products');
-        alert.success('Product created successfully')
-        dispatch({ type: NEW_PRODUCT_RESET})
+        if (updateError) {
+            alert.error(updateError);
+            dispatch(clearErrors())
+        }
+
+
+        if (isUpdated) {
+            history.push('/admin/products');
+            alert.success('Product updated successfully');
+            dispatch({ type: UPDATE_PRODUCT_RESET })
+        }
+
+    }, [dispatch, alert, error, isUpdated, history, updateError, product, productId])
+
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.set('name', name);
+        formData.set('price', price);
+        formData.set('description', description);
+        formData.set('category', category);
+        formData.set('stock', stock);
+        formData.set('seller', seller);
+        formData.set('width',width);
+        formData.set('height',height);
+        formData.set('fabricWeight',fabricWeight);
+        images.forEach(image => {
+            formData.append('images', image)
+        })
+
+        dispatch(updateProduct(product._id, formData))
     }
 
-},[dispatch, alert, error, success, history])
+    const onChange = e => {
 
-const submitHandler = (e) => {
-    e.preventDefault();
+        const files = Array.from(e.target.files)
 
-const formData = new FormData();
-formData.set('name', name);
-formData.set('price', price);
-formData.set('description', description);
-formData.set('category', category);
-formData.set('stock', stock);
-formData.set('seller', seller);
-formData.set('width',width);
-formData.set('height',height);
-formData.set('fabricWeight',fabricWeight);
+        setImagesPreview([]);
+        setImages([])
+        setOldImages([])
 
-images.forEach(image => {
-    formData.append('images', image)
-})
+        files.forEach(file => {
+            const reader = new FileReader();
 
-    dispatch(newProduct(formData))
-}
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    setImagesPreview(oldArray => [...oldArray, reader.result])
+                    setImages(oldArray => [...oldArray, reader.result])
+                }
+            }
 
-const onChange = e => {
-
-    const files = Array.from(e.target.files)
-
-    setImagesPreview([]);
-    setImages([]);
-
-    files.forEach(file => {
-        const reader = new FileReader();
-
-        reader.onload = () => {
-           if(reader.readyState === 2){
-               setImagesPreview(oldArray => [...oldArray, reader.result])
-               setImages(oldArray => [...oldArray, reader.result])
-
-           } 
-        }
-        reader.readAsDataURL(file)
-        
-    })
-    
-        
-    
-}
-
+            reader.readAsDataURL(file)
+        })
+    }
 
 
     return (
         <Fragment>
-            <MetaData title={'New Product'} />
+            <MetaData title={'Update Product'} />
             <div className="row">
                 <div className="col-12 col-md-2">
                     <Sidebar />
                 </div>
-               
 
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <div className="wrapper my-5">
                             <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
-                                <h1 className="mb-4">New Product</h1>
+                                <h1 className="mb-4">Update Product</h1>
 
                                 <div className="form-group">
                                     <label htmlFor="name_field">Name</label>
@@ -224,8 +242,12 @@ const onChange = e => {
                                         />
                                         <label className='custom-file-label' htmlFor='customFile'>
                                             Choose Images
-                                     </label>
+                                 </label>
                                     </div>
+
+                                    {oldImages && oldImages.map(img => (
+                                        <img key={img} src={img.url} alt={img.url} className="mt-3 mr-2" width="55" height="52" />
+                                    ))}
 
                                     {imagesPreview.map(img => (
                                         <img src={img} key={img} alt="Images Preview" className="mt-3 mr-2" width="55" height="52" />
@@ -240,8 +262,8 @@ const onChange = e => {
                                     className="btn btn-block py-3"
                                     disabled={loading ? true : false}
                                 >
-                                    CREATE
-                                </button>
+                                    UPDATE
+                            </button>
 
                             </form>
                         </div>
@@ -253,4 +275,4 @@ const onChange = e => {
     )
 }
 
-export default NewProduct
+export default UpdateProduct

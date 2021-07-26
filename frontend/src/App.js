@@ -9,8 +9,6 @@ import UpdatePassword from './components/user/UpdatePassword';
 import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
 import ProductDetails from './components/product/ProductDetails';
-
-
 import Cart from './components/cart/Cart';
 import Shipping from './components/cart/Shipping';
 import confirmOrder from './components/cart/ConfirmOrder';
@@ -39,6 +37,8 @@ import {Elements} from '@stripe/react-stripe-js'
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
 import NewProduct from './components/admin/NewProduct';
+import UpdateProduct from './components/admin/UpdateProduct';
+
 import { userReducer } from './reducers/userReducers';
 // import OrderDetails from './components/order/OrderDetails';
 
@@ -95,6 +95,7 @@ function App() {
       <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
       <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
       <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact />
+      <ProtectedRoute path="/admin/product/:id" isAdmin={true} component={UpdateProduct} exact />
 
 
       {/* {!loading && user.role !== 'admin' && (

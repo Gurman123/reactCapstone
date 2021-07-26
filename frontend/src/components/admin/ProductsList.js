@@ -18,7 +18,8 @@ const ProductsList = ({history}) => {
     const dispatch = useDispatch();
 
     const { loading, error, products } = useSelector(state => state.products);
-    const { error: deleteError, isdeleted} = useSelector(state => state.product)
+
+    const { error: deleteError, isDeleted } = useSelector(state => state.product);
 
     useEffect(() => {
         dispatch(getAdminProducts());
@@ -31,12 +32,12 @@ const ProductsList = ({history}) => {
             alert.error(deleteError);
             dispatch(clearErrors())
         }
-        if(isdeleted){
+        if(isDeleted){
             alert.success('Product deleted successfully!');
             history.push('/admin/products');
             dispatch({ type: DELETE_PRODUCT_RESET});
         }
-    }, [dispatch, alert, error, deleteError, isdeleted, history])
+    }, [dispatch, alert, error, deleteError, isDeleted, history])
 
     const setProducts = () => {
         const data = {
@@ -76,7 +77,7 @@ const ProductsList = ({history}) => {
                 price: `$${product.price}`,
                 stock: product.stock,
                 actions: <Fragment>
-                    <Link to={`/admin/product/${product._id}`} className="btn btn-primary py-1 px-2">
+                    <Link to={`/admin/product/${product._id}`} className="btn btn-primary py-1 px-2" >
                         <i className="fa fa-pencil"></i>
                     </Link>
                     <button className="btn btn-danger py-1 px-2 ml-2" onClick = {() => deleteProductHandler(product._id)}>

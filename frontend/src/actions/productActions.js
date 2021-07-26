@@ -10,13 +10,15 @@ import { ALL_PRODUCTS_REQUEST,
     NEW_PRODUCT_REQUEST,
     NEW_PRODUCT_SUCCESS,
     NEW_PRODUCT_FAIL,
+    DELETE_PRODUCT_REQUEST,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_FAIL,
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
-    DELETE_PRODUCT_REQUEST,
-    DELETE_PRODUCT_SUCCESS,
-    DELETE_PRODUCT_RESET,
-    DELETE_PRODUCT_FAIL,
+    UPDATE_PRODUCT_REQUEST,
+    UPDATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_FAIL,
     NEW_REVIEW_REQUEST,
     NEW_REVIEW_SUCCESS,
     NEW_REVIEW_FAIL,
@@ -90,6 +92,34 @@ export const deleteProduct = (id) => async (dispatch) => {
         })
     }
 }
+
+
+export const updateProduct = (id, productData) => async (dispatch) => {
+    try{
+        dispatch({ type: UPDATE_PRODUCT_REQUEST })
+
+        const config = {
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const { data } = await axios.put(`/api/admin/product/${id}`,productData,config)
+
+        dispatch({
+            type: UPDATE_PRODUCT_SUCCESS,
+            payload: data.success
+        })
+    }
+    catch(error){
+        console.log(error.response);
+        dispatch({
+            type: UPDATE_PRODUCT_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 export const getProductDetails = (id) => async (dispatch) => {
     try{
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
