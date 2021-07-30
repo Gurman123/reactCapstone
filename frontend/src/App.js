@@ -33,6 +33,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //admin imports
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
@@ -43,6 +44,8 @@ import OrdersList from './components/admin/OrdersList';
 //import { userReducer } from './reducers/userReducers';
 // import OrderDetails from './components/order/OrderDetails';
 
+=======
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
 =======
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
 function App() {
@@ -96,6 +99,7 @@ function App() {
       
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
       <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
       <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact />
@@ -108,6 +112,8 @@ function App() {
       )} */}
       
 =======
+=======
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
       <Footer/>
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
     </div>

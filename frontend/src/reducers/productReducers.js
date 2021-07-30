@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { ALL_PRODUCTS_REQUEST, 
     ALL_PRODUCTS_SUCCESS, 
     ALL_PRODUCTS_FAIL,
@@ -25,6 +26,9 @@ import { ALL_PRODUCTS_REQUEST,
       NEW_REVIEW_RESET,
       NEW_REVIEW_FAIL,
       CLEAR_ERRORS} from '../constants/productConstants'
+=======
+import { ALL_PRODUCTS_REQUEST, ALL_PRODUCTS_SUCCESS, ALL_PRODUCTS_FAIL , CLEAR_ERRORS, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL} from '../constants/productConstants'
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
 =======
 import { ALL_PRODUCTS_REQUEST, ALL_PRODUCTS_SUCCESS, ALL_PRODUCTS_FAIL , CLEAR_ERRORS, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL} from '../constants/productConstants'
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
@@ -60,6 +64,7 @@ export const productsReducer = (state = { products: [] }, action) => {
     }
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 export const productReducer = (state = {}, action) => {
     switch(action.type) {
@@ -110,6 +115,9 @@ export const productReducer = (state = {}, action) => {
 
 
 export const newProductReducer = (state = {product: {}}, action) => {
+=======
+export const productDetailsReducer = (state = {product : {}}, action) => {
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
     switch(action.type) {
 
         case NEW_PRODUCT_REQUEST:
@@ -146,6 +154,7 @@ export const newProductReducer = (state = {product: {}}, action) => {
             return state
     }
 }
+<<<<<<< HEAD
 
 //old
 
@@ -215,3 +224,5 @@ export const productDetailsReducer = (state = {product : {}}, action) => {
             return state
     }
 }
+=======
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
