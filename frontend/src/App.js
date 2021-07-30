@@ -16,7 +16,6 @@ import Payment from './components/cart/Payment';
 import OrderSuccess from './components/cart/OrderSuccess';
 
 import ListOrders from './components/order/ListOrders'
-import OrderDetails from './components/order/OrderDetails';
 
 import Login from './components/user/Login';
 import Register from './components/user/Register';
@@ -33,6 +32,7 @@ import { loadStripe } from '@stripe/stripe-js';
 //payment
 import {Elements} from '@stripe/react-stripe-js'
 
+<<<<<<< HEAD
 //admin imports
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
@@ -43,6 +43,8 @@ import OrdersList from './components/admin/OrdersList';
 //import { userReducer } from './reducers/userReducers';
 // import OrderDetails from './components/order/OrderDetails';
 
+=======
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
 function App() {
 
   const [stripeApiKey, setStripeApiKey] = useState('');
@@ -91,8 +93,9 @@ function App() {
       <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
       <ProtectedRoute path="/password/update" component={UpdatePassword} exact />
       <ProtectedRoute path="/orders/me" component={ListOrders} exact />
-      <ProtectedRoute path="/order/:id" component={OrderDetails} exact />
+      
       </div>
+<<<<<<< HEAD
       <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
       <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
       <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact />
@@ -104,6 +107,9 @@ function App() {
           <Footer />
       )} */}
       
+=======
+      <Footer/>
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
     </div>
     </Router>
   );

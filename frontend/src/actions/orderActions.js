@@ -7,12 +7,15 @@ import {
     MY_ORDERS_REQUEST,
     MY_ORDERS_SUCCESS,
     MY_ORDERS_FAIL,
+<<<<<<< HEAD
     ALL_ORDERS_REQUEST,
     ALL_ORDERS_SUCCESS,
     ALL_ORDERS_FAIL,
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
+=======
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
     CLEAR_ERRORS
 } from '../constants/orderConstants'
 
@@ -43,7 +46,7 @@ export const myOrders = (id) => async (dispatch) =>{
         dispatch({
             type: MY_ORDERS_REQUEST
         });
-        const {data} = await axios.get('/api/orders/me')
+        const {data} = await axios.get('api/orders/me')
         dispatch({
             type: MY_ORDERS_SUCCESS,
             payload: data.orders
@@ -56,6 +59,7 @@ export const myOrders = (id) => async (dispatch) =>{
     }
 }
 
+<<<<<<< HEAD
 export const getOrderDetails = (id) => async (dispatch) =>{
     try{
         dispatch({
@@ -92,6 +96,8 @@ export const allOrders = () => async (dispatch) =>{
     }
 }
 
+=======
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
 //clear errors
 export const clearErrors = () => async(dispatch) => {
     dispatch({

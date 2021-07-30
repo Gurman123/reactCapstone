@@ -2,10 +2,17 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
  
+<<<<<<< HEAD
 import { productsReducer,newProductReducer, productDetailsReducer,newReviewReducer, productReducer } from './reducers/productReducers'
 import { authReducer, userReducer, forgotPasswordReducer } from './reducers/userReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {newOrderReducer,myOrdersReducer,orderDetailsReducer,allOrdersReducer} from './reducers/orderReducers'
+=======
+import { productsReducer, productDetailsReducer } from './reducers/productReducers'
+import { authReducer, userReducer, forgotPasswordReducer } from './reducers/userReducers'
+import { cartReducer } from './reducers/cartReducers'
+import {newOrderReducer,myOrdersReducer} from './reducers/orderReducers'
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
 
 const reducer = combineReducers({
 products: productsReducer,
@@ -16,12 +23,16 @@ user: userReducer,
 forgotPassword: forgotPasswordReducer,
 cart: cartReducer,
 newOrder: newOrderReducer,
+<<<<<<< HEAD
 myOrders: myOrdersReducer,
 orderDetails: orderDetailsReducer,
 newReview:newReviewReducer,
 newProduct:newProductReducer,
 Product:productReducer,
 allOrders: allOrdersReducer
+=======
+myOrders: myOrdersReducer
+>>>>>>> parent of 48997f4 (reviews,admin dashboard)
 })
 
 let initialState = {
