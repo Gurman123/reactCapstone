@@ -6,15 +6,12 @@ import {
     MY_ORDERS_SUCCESS,
     MY_ORDERS_FAIL,
 <<<<<<< HEAD
-<<<<<<< HEAD
     ALL_ORDERS_REQUEST,
     ALL_ORDERS_SUCCESS,
     ALL_ORDERS_FAIL,
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
-=======
->>>>>>> parent of 48997f4 (reviews,admin dashboard)
 =======
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
     CLEAR_ERRORS
@@ -72,7 +69,6 @@ export const myOrdersReducer = (state ={orders: []},action) =>{
             return state;
     }
 <<<<<<< HEAD
-<<<<<<< HEAD
 }
 
 export const orderDetailsReducer = (state ={order: {}},action) =>{
@@ -126,8 +122,6 @@ export const allOrdersReducer = (state ={orders: []},action) =>{
         default:
             return state;
     }
-=======
->>>>>>> parent of 48997f4 (reviews,admin dashboard)
 =======
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
 }

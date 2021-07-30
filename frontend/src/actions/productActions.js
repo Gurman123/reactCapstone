@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 import { ALL_PRODUCTS_REQUEST, 
     ALL_PRODUCTS_SUCCESS, 
     ALL_PRODUCTS_FAIL , 
@@ -24,9 +23,6 @@ import { ALL_PRODUCTS_REQUEST,
     NEW_REVIEW_SUCCESS,
     NEW_REVIEW_FAIL,
     CLEAR_ERRORS} from '../constants/productConstants'
-=======
-import { ALL_PRODUCTS_REQUEST, ALL_PRODUCTS_SUCCESS, ALL_PRODUCTS_FAIL , CLEAR_ERRORS, PRODUCT_DETAILS_REQUEST,PRODUCT_DETAILS_SUCCESS,PRODUCT_DETAILS_FAIL} from '../constants/productConstants'
->>>>>>> parent of 48997f4 (reviews,admin dashboard)
 =======
 import { ALL_PRODUCTS_REQUEST, ALL_PRODUCTS_SUCCESS, ALL_PRODUCTS_FAIL , CLEAR_ERRORS, PRODUCT_DETAILS_REQUEST,PRODUCT_DETAILS_SUCCESS,PRODUCT_DETAILS_FAIL} from '../constants/productConstants'
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
@@ -55,7 +51,6 @@ export const getProducts = (keyword = '', currentPage = 1, price, category, rati
     }
 }
 
-<<<<<<< HEAD
 <<<<<<< HEAD
 export const newProduct = (productData) => async (dispatch) => {
     try{
@@ -131,8 +126,6 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 
 =======
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
-=======
->>>>>>> parent of 48997f4 (reviews,admin dashboard)
 export const getProductDetails = (id) => async (dispatch) => {
     try{
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
@@ -152,7 +145,6 @@ export const getProductDetails = (id) => async (dispatch) => {
     }
 }
 
-<<<<<<< HEAD
 <<<<<<< HEAD
 export const newReview = (reviewData) => async (dispatch) => {
     try{
@@ -196,8 +188,6 @@ export const getAdminProducts = (id) => async (dispatch) => {
     }
 }
 
-=======
->>>>>>> parent of 48997f4 (reviews,admin dashboard)
 =======
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
 //clear errors

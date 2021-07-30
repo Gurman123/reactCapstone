@@ -8,15 +8,12 @@ import {
     MY_ORDERS_SUCCESS,
     MY_ORDERS_FAIL,
 <<<<<<< HEAD
-<<<<<<< HEAD
     ALL_ORDERS_REQUEST,
     ALL_ORDERS_SUCCESS,
     ALL_ORDERS_FAIL,
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
-=======
->>>>>>> parent of 48997f4 (reviews,admin dashboard)
 =======
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
     CLEAR_ERRORS
@@ -63,7 +60,6 @@ export const myOrders = (id) => async (dispatch) =>{
 }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 export const getOrderDetails = (id) => async (dispatch) =>{
     try{
         dispatch({
@@ -100,8 +96,6 @@ export const allOrders = () => async (dispatch) =>{
     }
 }
 
-=======
->>>>>>> parent of 48997f4 (reviews,admin dashboard)
 =======
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
 //clear errors

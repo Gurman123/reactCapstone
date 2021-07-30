@@ -3,7 +3,6 @@ export const ALL_PRODUCTS_SUCCESS = 'ALL_PRODUCTS_SUCCESS'
 export const ALL_PRODUCTS_FAIL = 'ALL_PRODUCTS_FAIL'
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 export const NEW_PRODUCT_REQUEST = 'NEW_PRODUCT_REQUEST'
 export const NEW_PRODUCT_SUCCESS = 'NEW_PRODUCT_SUCCESS'
 export const NEW_PRODUCT_RESET = 'NEW_PRODUCT_RESET'
@@ -19,8 +18,6 @@ export const UPDATE_PRODUCT_SUCCESS = 'UPDATE_PRODUCT_SUCCESS'
 export const UPDATE_PRODUCT_RESET = 'UPDATE_PRODUCT_RESET'
 export const UPDATE_PRODUCT_FAIL = 'UPDATE_PRODUCT_FAIL'
 
-=======
->>>>>>> parent of 48997f4 (reviews,admin dashboard)
 =======
 >>>>>>> parent of 48997f4 (reviews,admin dashboard)
 export const PRODUCT_DETAILS_REQUEST = 'PRODUCT_DETAILS_REQUEST'
