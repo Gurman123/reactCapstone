@@ -62,7 +62,7 @@ function App() {
 
   }, [])
 
-  const { user,  loading } = useSelector(state => state.auth)
+  const { user, isAuthenticated, loading } = useSelector(state => state.auth)
 
   return (
     <Router>
@@ -75,7 +75,7 @@ function App() {
       
       <Route path="/cart" component={Cart} exact/>
       <ProtectedRoute path="/shipping" component={Shipping} />
-      <ProtectedRoute path="/order/confirm" component={confirmOrder} />
+      <ProtectedRoute path="/confirm" component={confirmOrder} />
       <ProtectedRoute path="/success" component={OrderSuccess} />
       {stripeApiKey &&
         <Elements stripe={loadStripe(stripeApiKey)}>
@@ -105,11 +105,15 @@ function App() {
       <ProtectedRoute path="/admin/users" isAdmin={true} component={UsersList} exact />
       <ProtectedRoute path="/admin/user/:id" isAdmin={true} component={UpdateUser} exact />
       <ProtectedRoute path="/admin/reviews" isAdmin={true} component={ProductReviews} exact />
-
+      
 
       {/* {!loading && user.role !== 'admin' && (
           <Footer />
       )} */}
+      {!loading && (!isAuthenticated || user.role !== 'admin') && (
+         <Footer />
+        )}
+
       
     </div>
     </Router>

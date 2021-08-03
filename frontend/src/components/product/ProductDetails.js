@@ -136,7 +136,10 @@ const ProductDetails = ({ match }) =>{
                 <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
 
                 <hr />
-
+                <p>Category: {product.category}</p>
+                <p>Width : {product.width}in</p>
+                <p>Height : {product.height}in</p>
+                <p>Fabric weight : {product.fabricWeight}</p>
                 <p id="product_price">${product.price}</p>
                 <div className="stockCounter d-inline">
                     <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
@@ -158,7 +161,7 @@ const ProductDetails = ({ match }) =>{
                 <h4 className="mt-2">Description:</h4>
                 <p>{product.description}</p>
                 <hr />
-                <p id="product_seller mb-3">Sold by: <strong>Saaria.com</strong></p>
+                <p id="product_seller mb-3">Sold by: <strong>{product.seller}</strong></p>
 				
 				{user ? <button id="review_btn" type="button" className="btn btn-primary mt-4" data-toggle="modal" data-target="#ratingModal"
                             onClick={setUserRatings}>

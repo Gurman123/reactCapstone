@@ -1,179 +1,209 @@
-import React, {Fragment,useState,  useEffect} from 'react'
-import Pagination from 'react-js-pagination'
-import Slider from 'rc-slider'
-import 'rc-slider/assets/index.css'
-import MetaData from './layout/MetaData'
-import Product from './product/Product'
-import Loader from './layout/Loader'
+import React, { Fragment, useState, useEffect } from "react";
+import Pagination from "react-js-pagination";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
+import MetaData from "./layout/MetaData";
+import Product from "./product/Product";
+import Loader from "./layout/Loader";
 
-import { useDispatch, useSelector } from 'react-redux'
-import { useAlert } from 'react-alert'
-import { getProducts } from '../actions/productActions'
+import Sliders from "react-animated-slider";
+import "react-animated-slider/build/horizontal.css";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
+import { getProducts } from "../actions/productActions";
 
 const { createSliderWithTooltip } = Slider;
-const Range = createSliderWithTooltip(Slider.Range)
+const Range = createSliderWithTooltip(Slider.Range);
 
 const Home = ({ match }) => {
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const [currentPage, setCurrentPage] = useState(1)
-
-  const [price, setPrice] = useState([1,1000])
-  const [category, setCategory] = useState('')
-  const [rating, setRating] = useState(0)
-  const categories =[
-                'Curtain panels',
-                'Pleated Curtains',
-                'Backdrops Curtains',
-                'Theater Stage Curtains',
-                'Domestic Curtains',
-                'Industrial Curtain',
-                'Pillow Covers',
-                'Stage Masking',
-                'Church Paraments',
-                'Leather-Products'
-  ]
+  const [price, setPrice] = useState([1, 1000]);
+  const [category, setCategory] = useState("");
+  const [rating, setRating] = useState(0);
+  const categories = [
+    "Curtain panels",
+    "Pleated Curtains",
+    "Backdrops Curtains",
+    "Theater Stage Curtains",
+    "Domestic Curtains",
+    "Industrial Curtain",
+    "Pillow Covers",
+    "Stage Masking",
+    "Church Paraments",
+    "Leather-Products",
+  ];
 
   const alert = useAlert();
- const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
- const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
+  const {
+    loading,
+    products,
+    error,
+    productsCount,
+    resPerPage,
+    filteredProductsCount,
+  } = useSelector((state) => state.products);
 
-const keyword = match.params.keyword
+  const keyword = match.params.keyword;
+  const content = [{image:'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'},{image: 'https://images.pexels.com/photos/6580214/pexels-photo-6580214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'},
+{image: 'https://images.pexels.com/photos/7118799/pexels-photo-7118799.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'},{image:'https://images.pexels.com/photos/6312357/pexels-photo-6312357.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'},{image: 'https://images.pexels.com/photos/6527039/pexels-photo-6527039.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'}];
 
-  useEffect(() => { 
-    
-    if(error){
-      return alert.error(error)
-   }
-      dispatch(getProducts(keyword, currentPage, price, category, rating));
+  useEffect(() => {
+    if (error) {
+      return alert.error(error);
+    }
+    dispatch(getProducts(keyword, currentPage, price, category, rating));
+  }, [dispatch, alert, error, keyword, currentPage, price, category, rating]);
 
-
-  }, [dispatch, alert, error, keyword, currentPage, price, category, rating])
-
-  function setCurrentPageNo(pageNumber){
-     setCurrentPage(pageNumber)
+  function setCurrentPageNo(pageNumber) {
+    setCurrentPage(pageNumber);
   }
 
   let count = productsCount;
-  if(keyword) {
+  if (keyword) {
     count = filteredProductsCount;
-  } 
+  }
 
-    return (
+  return (
+   
+    
+    <Fragment>
+      <Sliders autoplay={1000}>
+        {content.map((item, index) => (
+          <div
+            key={index}
+            className="mt-5"
+            style={{
+              background: `url('${item.image}') no-repeat center center`,
+              width: '100%',
+              height: '100%',
+              backgroundSize: 'cover'
+            }}
+          > 
+            <div className="center">
+             
+            </div>
+          </div>
+        ))}
+      </Sliders>
+
+      {loading ? (
+        <Loader />
+      ) : (
         <Fragment>
-          {loading? <Loader/> : (
-            <Fragment>
-               <MetaData title={'Buy best products online'}/>
-            <h1 id="product_heading">Latest Products</h1>
-            <section id="products" className="container mt-5">
-      <div className="row">
-
-        {keyword ? (
-           <Fragment>
-             <div className="col-6 col-md-3 mt-5 mb-5">
-               <div className="px-5">
-                  <Range
-                  marks={{1: `$1`,1000:`$1000`}}
-                  min={1}
-                  max={1000}
-                  defaultValue={[1,1000]}
-                  tipFormatter={value => `$${value}`}
-                  tipProps={{
-                    placement: "top",
-                    visible:true
-                  }}
-                  value={price}
-                  onChange={price => setPrice(price)}
-                  />
-
-                  <hr className="my-5"/>
-                  <div className="mt-5">
-                    <h4 className="mb-3">
-                      Categories
-                    </h4>
-                    <ul className="pl-0">
-                      {categories.map(category => (
-                        <li style={{cursor: 'pointer',
-                                listStyleType: 'none'
+          <MetaData title={"Buy best products online"} />
+          <h2 className="mt-5 text-center p-3" style={{backgroundColor: '#2a9d8f', color: 'white'}} id="product_heading">
+            Latest Products
+          </h2>
+          <section id="products" className="container mt-5">
+            <div className="row">
+              {keyword ? (
+                <Fragment>
+                  <div className="col-6 col-md-3 mt-5 mb-5">
+                    <div className="px-5">
+                      <Range
+                        marks={{ 1: `$1`, 1000: `$1000` }}
+                        min={1}
+                        max={1000}
+                        defaultValue={[1, 1000]}
+                        tipFormatter={(value) => `$${value}`}
+                        tipProps={{
+                          placement: "top",
+                          visible: true,
                         }}
-                        key={category}
-                        onClick={() => setCategory(category)}>
-                          {category}
-                        </li>
-                      ))}
-                    </ul>
+                        value={price}
+                        onChange={(price) => setPrice(price)}
+                      />
 
+                      <hr className="my-5" />
+                      <div className="mt-5">
+                        <h4 className="mb-3">Categories</h4>
+                        <ul className="pl-0">
+                          {categories.map((category) => (
+                            <li
+                              style={{
+                                cursor: "pointer",
+                                listStyleType: "none",
+                              }}
+                              key={category}
+                              onClick={() => setCategory(category)}
+                            >
+                              {category}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <hr className="my-3" />
+                      <div className="mt-5">
+                        <h4 className="mb-3">Ratings</h4>
+                        <ul className="pl-0">
+                          {[5, 4, 3, 2, 1].map((star) => (
+                            <li
+                              style={{
+                                cursor: "pointer",
+                                listStyleType: "none",
+                              }}
+                              key={star}
+                              onClick={() => setRating(star)}
+                            >
+                              <div className="rating-outer">
+                                <div
+                                  className="rating-inner"
+                                  style={{ width: `${star * 20}%` }}
+                                ></div>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                  <hr className="my-3"/>
-                  <div className="mt-5">
-                    <h4 className="mb-3">
-                      Ratings
-                    </h4>
-                    <ul className="pl-0">
-                      {[5, 4, 3, 2, 1].map(star => (
-                        <li style={{cursor: 'pointer',
-                                listStyleType: 'none'
-                        }}
-                        key={star}
-                        onClick={() => setRating(star)}>
-                         <div className="rating-outer">
-                           <div className="rating-inner"
-                             style={{width: `${star*20}%`}}
-                           >
-
-                           </div>
-                         </div>
-                        </li>
-                      ))}
-                    </ul>
-
+                  <div className="col-6 col-md-9">
+                    <div className="row">
+                      {products &&
+                        products.map((product) => (
+                          <Product
+                            key={product._id}
+                            product={product}
+                            col={4}
+                          />
+                        ))}
+                    </div>
                   </div>
-               </div>
-             </div>
-             <div className="col-6 col-md-9">
-             <div className="row">
-               {products && products.map(product => (
+                </Fragment>
+              ) : (
+                products &&
+                products.map((product) => (
+                  <Product key={product._id} product={product} col={3} />
+                ))
+              )}
+            </div>
+          </section>
 
-                <Product key={product._id} product={product} col={4}/>
-
-))}
-               </div>
-             </div>
-           </Fragment>
-        ): (
-          products && products.map(product => (
-
-            <Product key={product._id} product={product} col={3}/>
-         
-         ))
-        )}
-        
-        
-      </div>
-    </section>
-    
-    {resPerPage <= count &&(
-        <div className="d-flex justify-content-center mt-5">
-        <Pagination 
-           activePage = {currentPage}
-           itemsCountPerPage = {resPerPage}
-           totalItemsCount = {productsCount}
-           onChange={setCurrentPageNo} 
-           nextPageText = {'Next'}
-           prevPageText = {'Prev'}
-           firstPageText = {'First'}
-           lastPageText = {'Last'}
-           itemClass="page-item"
-           linkClass="page-link"
-        />
-      </div>
-    )}
-    
-            </Fragment>
+          {resPerPage <= count && (
+            <div className="d-flex justify-content-center mt-5">
+              <Pagination
+                activePage={currentPage}
+                itemsCountPerPage={resPerPage}
+                totalItemsCount={productsCount}
+                onChange={setCurrentPageNo}
+                nextPageText={"Next"}
+                prevPageText={"Prev"}
+                firstPageText={"First"}
+                lastPageText={"Last"}
+                itemClass="page-item"
+                linkClass="page-link"
+              />
+            </div>
           )}
-          
         </Fragment>
-    )
-}
+      )}
+    </Fragment>
+    
+  );
+};
 
-export default Home
+export default Home;

@@ -23,7 +23,7 @@ const Login = ({ history, location }) => {
         }
 
         if(error){
-            alert.error(error);
+            if (error != "Login first to access this resource.") alert.error(error);
             dispatch(clearErrors);
         }
     }, [dispatch, alert, isAuthenticated, error, history])
