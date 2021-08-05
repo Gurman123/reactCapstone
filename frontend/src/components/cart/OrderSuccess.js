@@ -1,9 +1,17 @@
-import React from 'react'
+import React, {useState, useEffect, useMountEffect} from 'react'
 import { Fragment } from 'react'
+import { useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import MetaData from '../layout/MetaData'
 
 const OrderSuccess = () =>{
+    const { cartItems } = useSelector(state => state.cart);
+    cartItems.length = 0;
+    localStorage.setItem('cartItems', '');
+    
+    // useMountEffect(window.location.reload(false));
+    
+    
     return (
         <Fragment>
             <MetaData title={'Order Success'} />

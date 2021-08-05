@@ -24,7 +24,7 @@ const Shipping = ({history}) => {
         e.preventDefault()
 
         dispatch(saveShippingInfo({address, city, phoneNo, postalCode, country}))
-        history.push('/order/confirm')
+        history.push('/confirm')
 
     }
     return (
@@ -63,7 +63,7 @@ const Shipping = ({history}) => {
                         <div className="form-group">
                             <label htmlFor="phone_field">Phone No</label>
                             <input
-                                type="phone"
+                                type="tel"
                                 id="phone_field"
                                 className="form-control"
                                 value={phoneNo}
@@ -75,7 +75,7 @@ const Shipping = ({history}) => {
                         <div className="form-group">
                             <label htmlFor="postal_code_field">Postal Code</label>
                             <input
-                                type="number"
+                                type="text"
                                 id="postal_code_field"
                                 className="form-control"
                                 value={postalCode}
