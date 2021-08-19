@@ -77,10 +77,10 @@ const ProductsList = ({history}) => {
                 price: `$${product.price}`,
                 stock: product.stock,
                 actions: <Fragment>
-                    <Link to={`/admin/product/${product._id}`} className="btn btn-primary py-1 px-2" >
+                    <Link to={`/admin/product/${product._id}`} className="btn btn-primary py-1 px-2 m-1" >
                         <i className="fa fa-pencil"></i>
                     </Link>
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick = {() => deleteProductHandler(product._id)}>
+                    <button className="btn btn-danger py-1 px-2 m-1" onClick = {() => deleteProductHandler(product._id)}>
                         <i className="fa fa-trash"></i>
                     </button>
                     </Fragment>
@@ -105,6 +105,7 @@ const ProductsList = ({history}) => {
 
                         {loading ? <Loader /> : (
                             <MDBDataTable
+                            responsive
                             data={setProducts()}
                             className="px-3"
                             bordered

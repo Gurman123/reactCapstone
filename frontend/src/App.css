@@ -616,3 +616,27 @@ ul.CTAs a {
   font-size: 0.8rem;
   color: grey;
 }
+
+
+
+
+
+/* Tablet */
+@media only screen and (max-width: 850px){
+  .fa-product-hunt:before, .fa-tachometer::before,.fa-shopping-basket::before,.fa-users::before,.fa-star::before  {
+    content: "";
+}
+#sidebar ul li a {
+  padding-left: 0px;
+  font-size: 1.1em;
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+
+}
+
+/* Mobile */
+/* @media only screen and (max-width: 600px){
+	
+} */

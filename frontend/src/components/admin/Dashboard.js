@@ -32,7 +32,7 @@ const Dashboard = () => {
         <div className="col-12 col-md-2">
           <Sidebar />
         </div>
-        <div className="col-12 col-md-10">
+        <div className="col-12 col-md-9 ml-3">
           <h1 className="my-4">Dashboard</h1>
 
           {loading ? (

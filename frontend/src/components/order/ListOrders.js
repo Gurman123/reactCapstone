@@ -84,6 +84,7 @@ const ListOrders = () => {
 
             {loading ? <Loader /> : (
                 <MDBDataTable
+                    responsive 
                     data={setOrders()}
                     className="px-3"
                     bordered

@@ -96,7 +96,7 @@ const ProductReviews = () => {
 
         actions: (
           <button
-            className="btn btn-danger py-1 px-2 ml-2"
+            className="btn btn-danger py-1 px-2 m-1"
             onClick={() => deleteReviewHandler(review._id)}
           >
             <i className="fa fa-trash"></i>
@@ -145,6 +145,7 @@ const ProductReviews = () => {
 
             {reviews && reviews.length > 0 ? (
               <MDBDataTable
+                responsive
                 data={setReviews()}
                 className="px-3"
                 bordered

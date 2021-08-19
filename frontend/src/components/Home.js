@@ -71,7 +71,7 @@ const Home = ({ match }) => {
    
     
     <Fragment>
-      <Sliders autoplay={1000}>
+      <Sliders autoplay={2000}>
         {content.map((item, index) => (
           <div
             key={index}
